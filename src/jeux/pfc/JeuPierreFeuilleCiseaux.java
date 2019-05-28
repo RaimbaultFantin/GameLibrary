@@ -4,9 +4,10 @@ import java.util.Arrays;
 import java.util.Random;
 import java.util.Scanner;
 
-import jeux.contract.IJeu;
+import jeux.contract.Jeu;
+import jeux.contract.JeuAbs;
 
-public class JeuPierreFeuilleCiseaux implements IJeu {
+public class JeuPierreFeuilleCiseaux extends JeuAbs {
 	enum Choix {
 		Pierre, Feuille, Ciseaux;
 
@@ -48,10 +49,12 @@ public class JeuPierreFeuilleCiseaux implements IJeu {
 		}
 		if (vous > moi) {
 			System.out.println("Bravo");
+			etat=1;
 			return true;
 		}
 		else {
 			System.out.println("Dommage");
+			etat=-1;
 			return false;
 		}
 	}

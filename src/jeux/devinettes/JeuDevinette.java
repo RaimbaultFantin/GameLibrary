@@ -5,9 +5,10 @@ import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
 
-import jeux.contract.IJeu;
+import jeux.contract.Jeu;
+import jeux.contract.JeuAbs;
 
-public class JeuDevinette implements IJeu{
+public class JeuDevinette extends JeuAbs{
 
 	@Override
 	public boolean play() {
@@ -29,9 +30,11 @@ public class JeuDevinette implements IJeu{
 		for (int i = 1; i < q.size(); ++i)
 			if (réponse.contains(q.get(i))) {
 				System.out.println("Bravo");
+				etat=1;
 				return true;
 			}
 		System.out.println("Dommage");
+		etat=-1;
 		return false;
 	}
 }

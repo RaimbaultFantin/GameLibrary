@@ -13,9 +13,10 @@ import java.util.stream.Stream;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 
-import jeux.contract.IJeu;
+import jeux.contract.Jeu;
+import jeux.contract.JeuAbs;
 
-public class JeuPendu implements IJeu {
+public class JeuPendu extends JeuAbs {
 	private final int MAX,MIN;
 
 	public JeuPendu(boolean hard) {
@@ -62,10 +63,12 @@ public class JeuPendu implements IJeu {
 		}
 		if (p.gagné()) {
 			System.out.println("Bravo");
+			etat=1;
 			return true;
 		}
 		else {
 			System.out.println("Dommage");
+			etat=-1;
 			return false;
 		}
 	}

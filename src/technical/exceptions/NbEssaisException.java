@@ -1,15 +1,16 @@
 package technical.exceptions;
+
 /**
  * 
- * Exception GamesNull : jeu non initialisé
+ * Exception NbEssais : nbessais inferieur ou égal à zéro
  * @author Raimbault Fantin, Maziarz Oliwier
  *
  */
-public class GamesNullException extends Exception {
+public class NbEssaisException extends Exception {
 	
 	private static final long serialVersionUID = 1L;
 	
-	public GamesNullException(String message) {
+	public NbEssaisException(String message) {
 		super(message);
 	}
 }

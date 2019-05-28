@@ -5,9 +5,10 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
-import jeux.contract.IJeu;
+import jeux.contract.Jeu;
+import jeux.contract.JeuAbs;
 
-public class JeuSuite implements IJeu{
+public class JeuSuite extends JeuAbs{
 	private final int NB;
 
 	public JeuSuite(boolean hard) {
@@ -42,26 +43,19 @@ public class JeuSuite implements IJeu{
 			BigInteger valeur = new BigInteger(sc.next());
 			if (valeur.equals(aTrouver)) {
 				System.out.println("Bravo");
+				etat=1;
 				return true;
 			}
 			else {
 				System.out.println("Dommage");
+				etat=-1;
 				return false;
 			}
 		} catch (NumberFormatException e){
 			System.out.println("Dommage");
-			System.out.println(e.getMessage());
+			System.out.println("Exception levée " +e.getMessage());
 		}
+		etat=-1;
 		return false;
 	}
-
-//	public boolean estUnEntier(String sc) {
-//		try {
-//			Integer.parseInt(sc);
-//			return true;
-//		} catch (NumberFormatException e){
-//			System.out.println(e.getMessage());
-//		}
-//		return false;
-//	}
 }

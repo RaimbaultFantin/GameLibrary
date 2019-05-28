@@ -1,28 +1,37 @@
-import java.util.List;
-
-import jeux.compose.JeuCompose;
-import jeux.contract.IJeu;
+import jeux.assemblage.AssemblageEt;
+import jeux.assemblage.AssemblageNEssais;
+import jeux.assemblage.AssemblageOu;
+import jeux.contract.Jeu;
+import jeux.crazy.JeuCrazy;
 import jeux.devinettes.JeuDevinette;
+import jeux.intrus.JeuIntru;
 import jeux.pendu.JeuPendu;
+import jeux.pfc.JeuPierreFeuilleCiseaux;
+import jeux.pppg.JeuPlusPetitPlusGrand;
 import jeux.suites.JeuSuite;
-import regles.Regle;
-import regles.RegleEssaisInfini;
+import jeux.tictactoe.JeuTicTacToe;
+import technical.exceptions.GamesNullException;
+import technical.exceptions.NbEssaisException;
 
 
 public class AppliTest {
 	public static void main(String[] args) {
-		IJeu jeux1 = new JeuDevinette();
-		IJeu jeux2 = new JeuDevinette();
-		IJeu jeux3 = new JeuSuite();
-		IJeu jeux4 = new JeuSuite();
-		Regle regle = new RegleEssaisInfini();
-		IJeu jeuxcompose1 = new JeuCompose(jeux1, jeux2,regle);
-		IJeu jeuxcompose2 = new JeuCompose(jeux3, jeux4,regle);
-		IJeu jeuxcomposecompose = new JeuCompose(jeuxcompose1, jeuxcompose2, regle);
-		if(jeuxcomposecompose.play()) {
-			System.out.println("vous avez gagné le jeu");
-		}else {
-			System.out.println("vous êtes nul(e)");
+		Jeu jeux1 = new JeuTicTacToe();
+		Jeu jeux2 = new JeuDevinette();
+		Jeu jeux3 = new JeuSuite();
+		Jeu jeux4 = new JeuSuite();
+		Jeu assemblage = null;
+		try {
+			assemblage = new AssemblageNEssais(jeux1, -4);
+		} catch (NbEssaisException e1) {
+			e1.printStackTrace();
 		}
+		Jeu assemblage2 = new AssemblageEt(assemblage,jeux3);
+		try {
+			assemblage2.play();
+		} catch (GamesNullException e) {
+			e.printStackTrace();
+		}
+		assemblage2.resultat();
 	}
 }

@@ -2,9 +2,9 @@ package jeux.crazy;
 
 import java.util.Scanner;
 
-import jeux.contract.IJeu;
+import jeux.contract.JeuAbs;
 
-public class JeuCrazy implements IJeu{
+public class JeuCrazy extends JeuAbs{
 
 	@Override
 	public boolean play() {
@@ -38,15 +38,18 @@ public class JeuCrazy implements IJeu{
 			}
 			if (c.equals(objectif)) {
 				System.out.println("Bravo");
+				etat=1;
 				return true;
 			}
 			else {
 				System.out.println("Dommage");
+				etat=-1;
 				return false;
 			}
 		}
 		catch (RuntimeException e) {
 			System.out.println(e.getMessage());
+			etat=-1;
 			return false;
 		}
 	}

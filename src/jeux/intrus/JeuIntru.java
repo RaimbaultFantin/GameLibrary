@@ -5,9 +5,10 @@ import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
 
-import jeux.contract.IJeu;
+import jeux.contract.Jeu;
+import jeux.contract.JeuAbs;
 
-public class JeuIntru implements IJeu{
+public class JeuIntru extends JeuAbs{
 	private static class Question {
 		public final List<String> mots;
 		public final int intrus;
@@ -46,15 +47,18 @@ public class JeuIntru implements IJeu{
 			int intrus = sc.nextInt();
 			if (intrus == q.intrus) {
 				System.out.println("Bravo");
+				etat=1;
 				return true;
 			}
 			else {
 				System.out.println("Dommage");
+				etat=-1;
 				return false;
 			}
 		}
 		catch (Exception e) {
 			System.out.println("Raté");
+			etat=-1;
 			return false;
 		}
 	}

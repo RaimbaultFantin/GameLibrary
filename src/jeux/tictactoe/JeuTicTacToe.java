@@ -7,10 +7,11 @@ import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
 
-import jeux.contract.IJeu;
+import jeux.contract.Jeu;
+import jeux.contract.JeuAbs;
 import jeux.tictactoe.TicTacToe.Pièce;
 
-public class JeuTicTacToe implements IJeu{
+public class JeuTicTacToe extends JeuAbs{
 	private static Coord choixAléatoire(TicTacToe tic) {
 		ArrayList<Coord> coords = new ArrayList<>();
 		for (int li = 0; li < TicTacToe.NB; ++li)
@@ -32,11 +33,17 @@ public class JeuTicTacToe implements IJeu{
 				int li, co;
 				li = sc.nextInt();
 				co = sc.nextInt();
-				if (li >= 0 && li < TicTacToe.NB && co >= 0 && co < TicTacToe.NB)
+
+				if (li >= 0 && li < TicTacToe.NB && co >= 0 && co < TicTacToe.NB) {
 					return new Coord(li, co);
+				}else {
+					System.out.println("erreur saisie");
+					sc.nextLine();
+				}
 			} catch (Exception e) {
+				System.out.println("Raté, veuillez essayer à nouveau");
+				sc.nextLine();
 			}
-			System.out.println("Raté, veuillez essayer à nouveau");
 		}
 	}
 
@@ -58,14 +65,17 @@ public class JeuTicTacToe implements IJeu{
 		j = tic.gagnant();
 		if (j == null) {
 			System.out.println("Match nul");
+			etat=-1;
 			return false;
 		}
 		else if (j == ROND) {
 			System.out.println("Bravo");
+			etat=1;
 			return true;
 		}
 		else {
 			System.out.println("Dommage");
+			etat=-1;
 			return false;
 		}
 	}
